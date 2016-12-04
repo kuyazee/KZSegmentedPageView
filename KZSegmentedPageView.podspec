@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "KZSegmentedPageView"
-s.version      = "1.0.0"
+s.version      = "1.0.1"
 s.summary      = "Subclass that combines the functionality of UISegmentedControl and UIPageViewController"
 s.homepage     = "https://github.com/kuyazee/KZSegmentedPageView"
 s.license      = { :type => "MIT", :file => "LICENSE" }
