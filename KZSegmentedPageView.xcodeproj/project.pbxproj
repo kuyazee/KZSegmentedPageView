@@ -12,7 +12,7 @@
 		A6D773AD1DF4040000D57A37 /* KZSegmentedPageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D7739F1DF4040000D57A37 /* KZSegmentedPageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D773B81DF4041500D57A37 /* KZSegmentedPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D773B61DF4041500D57A37 /* KZSegmentedPageView.swift */; };
 		A6D773B91DF4041500D57A37 /* KZSPHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D773B71DF4041500D57A37 /* KZSPHelpers.swift */; };
-		A6D7740C1DF40B6100D57A37 /* KZSegmentedPageVIew.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A6D7740B1DF40B6100D57A37 /* KZSegmentedPageVIew.podspec */; };
+		A6D7740C1DF40B6100D57A37 /* KZSegmentedPageView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A6D7740B1DF40B6100D57A37 /* KZSegmentedPageView.podspec */; };
 		A6D7740F1DF40BBC00D57A37 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A6D7740D1DF40BBC00D57A37 /* LICENSE */; };
 		A6D774101DF40BBC00D57A37 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A6D7740E1DF40BBC00D57A37 /* README.md */; };
 /* End PBXBuildFile section */
@@ -36,7 +36,7 @@
 		A6D773AC1DF4040000D57A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6D773B61DF4041500D57A37 /* KZSegmentedPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KZSegmentedPageView.swift; sourceTree = "<group>"; };
 		A6D773B71DF4041500D57A37 /* KZSPHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KZSPHelpers.swift; sourceTree = "<group>"; };
-		A6D7740B1DF40B6100D57A37 /* KZSegmentedPageVIew.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KZSegmentedPageVIew.podspec; sourceTree = "<group>"; };
+		A6D7740B1DF40B6100D57A37 /* KZSegmentedPageView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KZSegmentedPageView.podspec; sourceTree = "<group>"; };
 		A6D7740D1DF40BBC00D57A37 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A6D7740E1DF40BBC00D57A37 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +63,7 @@
 		A6D773921DF4040000D57A37 = {
 			isa = PBXGroup;
 			children = (
-				A6D7740B1DF40B6100D57A37 /* KZSegmentedPageVIew.podspec */,
+				A6D7740B1DF40B6100D57A37 /* KZSegmentedPageView.podspec */,
 				A6D7740D1DF40BBC00D57A37 /* LICENSE */,
 				A6D7740E1DF40BBC00D57A37 /* README.md */,
 				A6D7739E1DF4040000D57A37 /* KZSegmentedPageView */,
@@ -195,7 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D7740F1DF40BBC00D57A37 /* LICENSE in Resources */,
-				A6D7740C1DF40B6100D57A37 /* KZSegmentedPageVIew.podspec in Resources */,
+				A6D7740C1DF40B6100D57A37 /* KZSegmentedPageView.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
