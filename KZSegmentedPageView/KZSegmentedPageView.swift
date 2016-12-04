@@ -128,9 +128,7 @@ import UIKit
         view.frame = bounds
         view.backgroundColor = UIColor.whiteColor()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         addSubview(view)
-        view.bindFrameToSuperviewBounds()
         
         pageViewControllerView = UIView(frame: CGRect(x: 0, y: 44, width: 375, height: 623))
         pageViewControllerView.backgroundColor = UIColor.grayColor()
@@ -222,19 +220,8 @@ import UIKit
             segmentedLeftPaddingConstraint,
             segmentedBottomPaddingToPageViewControllerConstraint])
         segmentedControl.addConstraint(segmentedHeighConstraint)
-//        NSLayoutConstraint.activateConstraints([
-//            pvLeftConstraint,
-//            pvRightConstraint,
-//            pvBottomConstraint,
-//            segmentedTopPaddingConstraint,
-//            segmentedRightPaddingConstraint,
-//            segmentedLeftPaddingConstraint,
-//            segmentedBottomPaddingToPageViewControllerConstraint,
-//            segmentedHeighConstraint
-//        ])
         
-//        let bundle = NSBundle(identifier: "com.KZSegmentedPageView")//NSBundle(forClass: self.dynamicType)
-//        let nib = UINib(nibName: "KZSegmentedPageView", bundle: bundle)
+        view.bindFrameToSuperviewBounds()
         return view
     }
     
