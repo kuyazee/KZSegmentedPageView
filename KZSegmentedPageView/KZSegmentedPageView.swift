@@ -22,6 +22,11 @@ import UIKit
     var segmentedRightPaddingConstraint: NSLayoutConstraint!
     var segmentedBottomPaddingToPageViewControllerConstraint: NSLayoutConstraint!
     
+    func configure(owner:UIViewController, segments:[KZSegment]) {
+        owner.addChildViewController(pageViewController)
+        self.segments = segments
+    }
+    
     
     @IBInspectable public var scHeight:CGFloat = 29 {
         didSet {
@@ -117,15 +122,17 @@ import UIKit
         
         
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        pageViewController.view.frame = pageViewControllerView.bounds
         pageViewControllerView.addSubview(pageViewController.view)
-        pageViewController.view.bindFrameToSuperviewBounds()
+        
+//        pageViewController.view.bindFrameToSuperviewBounds()
         
         pageViewControllerView.layoutIfNeeded()
     }
     
     func loadViewFromNib() -> UIView {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 667))
-        view.frame = bounds
+//        view.frame = bounds
         view.backgroundColor = UIColor.whiteColor()
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
@@ -133,11 +140,13 @@ import UIKit
         pageViewControllerView = UIView(frame: CGRect(x: 0, y: 44, width: 375, height: 623))
         pageViewControllerView.backgroundColor = UIColor.grayColor()
         pageViewControllerView.translatesAutoresizingMaskIntoConstraints = false
+        
         segmentedControl = UISegmentedControl(frame: CGRect(x: 8, y: 8, width: 359, height: 29))
         segmentedControl.insertSegmentWithTitle("Segment 1", atIndex: 0, animated: false)
         segmentedControl.insertSegmentWithTitle("Segment 2", atIndex: 1, animated: false)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
+        
         view.addSubview(pageViewControllerView)
         view.addSubview(segmentedControl)
         
@@ -215,13 +224,17 @@ import UIKit
             attribute: .NotAnAttribute, 
             multiplier: 1, 
             constant: 29)
-        view.addConstraints([segmentedTopPaddingConstraint,
+        view.addConstraints([
+            segmentedTopPaddingConstraint,
             segmentedRightPaddingConstraint,
             segmentedLeftPaddingConstraint,
-            segmentedBottomPaddingToPageViewControllerConstraint])
+            segmentedBottomPaddingToPageViewControllerConstraint
+            ])
+        
         segmentedControl.addConstraint(segmentedHeighConstraint)
         
         view.bindFrameToSuperviewBounds()
+        view.layoutIfNeeded()
         return view
     }
     
