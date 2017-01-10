@@ -22,7 +22,7 @@ import UIKit
     var segmentedRightPaddingConstraint: NSLayoutConstraint!
     var segmentedBottomPaddingToPageViewControllerConstraint: NSLayoutConstraint!
     
-    func configure(owner:UIViewController, segments:[KZSegment]) {
+    public func configure(owner:UIViewController, segments:[KZSegment]) {
         owner.addChildViewController(pageViewController)
         self.segments = segments
     }
