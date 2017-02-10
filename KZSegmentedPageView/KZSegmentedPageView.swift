@@ -8,12 +8,12 @@
 
 import UIKit
 
-@IBDesignable public class KZSegmentedPageView: UIView {
+public class KZSegmentedPageView: UIView {
     public weak var delegate:KZSegmentedPageViewDelegate?
     
     private var view:UIView!
     private var pageViewControllerView: UIView!
-    var segmentedControl: UISegmentedControl!
+    public var segmentedControl: UISegmentedControl!
     public var pageViewController:UIPageViewController!
     
     var segmentedHeighConstraint: NSLayoutConstraint!
@@ -26,7 +26,6 @@ import UIKit
         owner.addChildViewController(pageViewController)
         self.segments = segments
     }
-    
     
     @IBInspectable public var scHeight:CGFloat = 29 {
         didSet {
@@ -84,10 +83,6 @@ import UIKit
     }
     
     
-   
-    
-    
-    
     @IBAction func segmentedControlClicked(sender: UISegmentedControl) {
         delegate?.segmentedPageView(self, didSelectSegmentAtIndex: sender.selectedSegmentIndex)
         scrollToViewController(index: sender.selectedSegmentIndex)
@@ -133,12 +128,12 @@ import UIKit
     func loadViewFromNib() -> UIView {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 667))
 //        view.frame = bounds
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.clearColor()
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         
         pageViewControllerView = UIView(frame: CGRect(x: 0, y: 44, width: 375, height: 623))
-        pageViewControllerView.backgroundColor = UIColor.grayColor()
+        pageViewControllerView.backgroundColor = UIColor.clearColor()
         pageViewControllerView.translatesAutoresizingMaskIntoConstraints = false
         
         segmentedControl = UISegmentedControl(frame: CGRect(x: 8, y: 8, width: 359, height: 29))
