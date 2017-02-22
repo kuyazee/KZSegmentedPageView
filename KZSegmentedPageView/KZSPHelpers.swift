@@ -16,7 +16,7 @@ public protocol KZSegmentedPageViewDelegate: class {
      - parameter segmentedPageViewController: the segmentedPageViewController instance
      - parameter count: the total number of pages.
      */
-    func segmentedPageView(segmentedPageView: KZSegmentedPageView, didUpdatePageCount count: Int)
+    func segmentedPageView(_ segmentedPageView: KZSegmentedPageView, didUpdatePageCount count: Int)
     
     /**
      Called when the current index is updated.
@@ -24,7 +24,7 @@ public protocol KZSegmentedPageViewDelegate: class {
      - parameter segmentedPageViewController: the segmentedPageViewController instance
      - parameter index: the index of the currently visible page.
      */
-    func segmentedPageView(segmentedPageView: KZSegmentedPageView, didUpdateSegmentIndex index: Int)
+    func segmentedPageView(_ segmentedPageView: KZSegmentedPageView, didUpdateSegmentIndex index: Int)
     
     /**
      Called when the current index will update.
@@ -32,7 +32,7 @@ public protocol KZSegmentedPageViewDelegate: class {
      - parameter segmentedPageViewController: the segmentedPageViewController instance
      - parameter index: the index of the next page to be visible.
      */
-    func segmentedPageView(segmentedPageView:KZSegmentedPageView, willUpdatePageIndex index:Int)
+    func segmentedPageView(_ segmentedPageView:KZSegmentedPageView, willUpdatePageIndex index:Int)
     
     /**
      Called when a segment is clicked.
@@ -40,7 +40,7 @@ public protocol KZSegmentedPageViewDelegate: class {
      - parameter segmentedPageViewController: the segmentedPageViewController instance
      - parameter index: the index of the segmentedControl that is clicked.
      */
-    func segmentedPageView(segmentedPageView:KZSegmentedPageView, didSelectSegmentAtIndex index:Int)
+    func segmentedPageView(_ segmentedPageView:KZSegmentedPageView, didSelectSegmentAtIndex index:Int)
 }
 
 public struct KZSegment {
@@ -63,8 +63,8 @@ extension UIView {
         }
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        superview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[subview]-0-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["subview": self]))
-        superview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[subview]-0-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["subview": self]))
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": self]))
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": self]))
     }
 }
 

@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class KZSegmentedPageView: UIView {
-    public weak var delegate:KZSegmentedPageViewDelegate?
+open class KZSegmentedPageView: UIView {
+    open weak var delegate:KZSegmentedPageViewDelegate?
     
-    private var view:UIView!
-    private var pageViewControllerView: UIView!
-    public var segmentedControl: UISegmentedControl!
-    public var pageViewController:UIPageViewController!
+    fileprivate var view:UIView!
+    fileprivate var pageViewControllerView: UIView!
+    open var segmentedControl: UISegmentedControl!
+    open var pageViewController:UIPageViewController!
     
     var segmentedHeighConstraint: NSLayoutConstraint!
     var segmentedTopPaddingConstraint: NSLayoutConstraint!
@@ -22,53 +22,53 @@ public class KZSegmentedPageView: UIView {
     var segmentedRightPaddingConstraint: NSLayoutConstraint!
     var segmentedBottomPaddingToPageViewControllerConstraint: NSLayoutConstraint!
     
-    public func configure(owner:UIViewController, segments:[KZSegment]) {
+    open func configure(_ owner:UIViewController, segments:[KZSegment]) {
         owner.addChildViewController(pageViewController)
         self.segments = segments
     }
     
-    @IBInspectable public var scHeight:CGFloat = 29 {
+    @IBInspectable open var scHeight:CGFloat = 29 {
         didSet {
             segmentedHeighConstraint.constant = scHeight
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable public var scPaddingLeft:CGFloat = 8 {
+    @IBInspectable open var scPaddingLeft:CGFloat = 8 {
         didSet {
             segmentedLeftPaddingConstraint.constant = scPaddingLeft
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable public var scPaddingRight:CGFloat = 8 {
+    @IBInspectable open var scPaddingRight:CGFloat = 8 {
         didSet {
             segmentedRightPaddingConstraint.constant = scPaddingRight
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable public var scPaddingTop:CGFloat = 8 {
+    @IBInspectable open var scPaddingTop:CGFloat = 8 {
         didSet {
             segmentedTopPaddingConstraint.constant = scPaddingTop
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable public var scPaddingBottom:CGFloat = 8 {
+    @IBInspectable open var scPaddingBottom:CGFloat = 8 {
         didSet {
             segmentedBottomPaddingToPageViewControllerConstraint.constant = scPaddingBottom
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable public var scTintColor:UIColor = UIColor(colorLiteralRed: 0, green: 122/255, blue: 1, alpha: 1) {
+    @IBInspectable open var scTintColor:UIColor = UIColor(colorLiteralRed: 0, green: 122/255, blue: 1, alpha: 1) {
         didSet {
             segmentedControl.tintColor = scTintColor
         }
     }
     
-    @IBInspectable public var scBackgroundColor:UIColor = UIColor.clearColor() {
+    @IBInspectable open var scBackgroundColor:UIColor = UIColor.clear {
         didSet {
             segmentedControl.backgroundColor = scBackgroundColor
             segmentedControl.clipsToBounds = true
@@ -76,36 +76,36 @@ public class KZSegmentedPageView: UIView {
         }
     }
     
-    @IBInspectable public var viewBackgroundColor:UIColor = UIColor.whiteColor() {
+    @IBInspectable open var viewBackgroundColor:UIColor = UIColor.white {
         didSet {
             view.backgroundColor = viewBackgroundColor
         }
     }
     
     
-    @IBAction func segmentedControlClicked(sender: UISegmentedControl) {
+    @IBAction func segmentedControlClicked(_ sender: UISegmentedControl) {
         delegate?.segmentedPageView(self, didSelectSegmentAtIndex: sender.selectedSegmentIndex)
         scrollToViewController(index: sender.selectedSegmentIndex)
     }
     
-    private var transitionInProgress:Bool = false
-    public var isTransitioning:Bool {
+    fileprivate var transitionInProgress:Bool = false
+    open var isTransitioning:Bool {
         return transitionInProgress
     }
     
-    public var segments:[KZSegment] = [] {
+    open var segments:[KZSegment] = [] {
         didSet {
             pageViewController.dataSource = self
             pageViewController.delegate = self
             
             if let initialViewController = segments.first?.viewController {
-                scrollToViewController(initialViewController, direction: .Forward)
+                scrollToViewController(initialViewController, direction: .forward)
             }
             delegate?.segmentedPageView(self, didUpdatePageCount: segments.count)
             
             segmentedControl.removeAllSegments()
             for i in 0..<segments.count {
-                segmentedControl.insertSegmentWithTitle(segments[i].title, atIndex: i, animated: false)
+                segmentedControl.insertSegment(withTitle: segments[i].title, at: i, animated: false)
             }
             
             segmentedControl.selectedSegmentIndex = 0
@@ -116,7 +116,7 @@ public class KZSegmentedPageView: UIView {
         view = loadViewFromNib()
         
         
-        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.view.frame = pageViewControllerView.bounds
         pageViewControllerView.addSubview(pageViewController.view)
         
@@ -128,17 +128,17 @@ public class KZSegmentedPageView: UIView {
     func loadViewFromNib() -> UIView {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 667))
 //        view.frame = bounds
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         
         pageViewControllerView = UIView(frame: CGRect(x: 0, y: 44, width: 375, height: 623))
-        pageViewControllerView.backgroundColor = UIColor.clearColor()
+        pageViewControllerView.backgroundColor = UIColor.clear
         pageViewControllerView.translatesAutoresizingMaskIntoConstraints = false
         
         segmentedControl = UISegmentedControl(frame: CGRect(x: 8, y: 8, width: 359, height: 29))
-        segmentedControl.insertSegmentWithTitle("Segment 1", atIndex: 0, animated: false)
-        segmentedControl.insertSegmentWithTitle("Segment 2", atIndex: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "Segment 1", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Segment 2", at: 1, animated: false)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
         
@@ -147,76 +147,76 @@ public class KZSegmentedPageView: UIView {
         
         let pvLeftConstraint = NSLayoutConstraint(
             item: pageViewControllerView,
-            attribute: .Leading, 
-            relatedBy: .Equal, 
+            attribute: .leading, 
+            relatedBy: .equal, 
             toItem: view,
-            attribute: .Leading, 
+            attribute: .leading, 
             multiplier: 1, 
             constant: 0)
         
         let pvRightConstraint = NSLayoutConstraint(
             item: pageViewControllerView, 
-            attribute: .Trailing, 
-            relatedBy: .Equal, 
+            attribute: .trailing, 
+            relatedBy: .equal, 
             toItem: view,
-            attribute: .Trailing, 
+            attribute: .trailing, 
             multiplier: 1, 
             constant: 0)
         
         let pvBottomConstraint = NSLayoutConstraint(
             item: pageViewControllerView, 
-            attribute: .Bottom, 
-            relatedBy: .Equal, 
+            attribute: .bottom, 
+            relatedBy: .equal, 
             toItem: view, 
-            attribute: .Bottom, 
+            attribute: .bottom, 
             multiplier: 1, 
             constant: 0)
         view.addConstraints([pvLeftConstraint, pvRightConstraint, pvBottomConstraint])
         
-        segmentedControl.addTarget(self, action: #selector(self.segmentedControlClicked(_:)), forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(self.segmentedControlClicked(_:)), for: .valueChanged)
         
         segmentedTopPaddingConstraint = NSLayoutConstraint(
             item: segmentedControl,
-            attribute: .Top,
-            relatedBy: .Equal,
+            attribute: .top,
+            relatedBy: .equal,
             toItem: view, 
-            attribute: .Top,
+            attribute: .top,
             multiplier: 1,
             constant: 8)
         
         segmentedRightPaddingConstraint = NSLayoutConstraint(
             item: view,
-            attribute: .Trailing,
-            relatedBy: .Equal,
+            attribute: .trailing,
+            relatedBy: .equal,
             toItem: segmentedControl,
-            attribute: .Trailing,
+            attribute: .trailing,
             multiplier: 1,
             constant: 8)
         
         segmentedLeftPaddingConstraint =  NSLayoutConstraint(
             item: segmentedControl, 
-            attribute: .Leading, 
-            relatedBy: .Equal, 
+            attribute: .leading, 
+            relatedBy: .equal, 
             toItem: view, 
-            attribute: .Leading, 
+            attribute: .leading, 
             multiplier: 1, 
             constant: 8)
         
         segmentedBottomPaddingToPageViewControllerConstraint = NSLayoutConstraint(
             item: pageViewControllerView, 
-            attribute: .Top, 
-            relatedBy: .Equal, 
+            attribute: .top, 
+            relatedBy: .equal, 
             toItem: segmentedControl,
-            attribute: .Bottom, 
+            attribute: .bottom, 
             multiplier: 1,
             constant: 8)
         
         segmentedHeighConstraint = NSLayoutConstraint(
             item: segmentedControl,
-            attribute: .Height, 
-            relatedBy: .Equal, 
+            attribute: .height, 
+            relatedBy: .equal, 
             toItem: nil, 
-            attribute: .NotAnAttribute, 
+            attribute: .notAnAttribute, 
             multiplier: 1, 
             constant: 29)
         view.addConstraints([
@@ -253,8 +253,8 @@ extension KZSegmentedPageView {
      */
     public func scrollToViewController(index newIndex: Int) {
         if let firstViewController = pageViewController.viewControllers?.first,
-            let currentIndex = segments.indexOf({ $0.viewController == firstViewController }) {
-            let direction: UIPageViewControllerNavigationDirection = newIndex > currentIndex ? .Forward : .Reverse
+            let currentIndex = segments.index(where: { $0.viewController == firstViewController }) {
+            let direction: UIPageViewControllerNavigationDirection = newIndex > currentIndex ? .forward : .reverse
             let nextViewController = segments[newIndex].viewController
             scrollToViewController(nextViewController, direction: direction)
         }
@@ -265,7 +265,7 @@ extension KZSegmentedPageView {
      
      - parameter viewController: the view controller to show.
      */
-    private func scrollToViewController(viewController: UIViewController, direction: UIPageViewControllerNavigationDirection) {
+    fileprivate func scrollToViewController(_ viewController: UIViewController, direction: UIPageViewControllerNavigationDirection) {
         if !transitionInProgress {
             pageViewController.setViewControllers([viewController], direction: direction, animated: true, completion: { (finished) -> Void in
                 self.notifytimelineDelegateOfNewIndex()
@@ -277,9 +277,9 @@ extension KZSegmentedPageView {
     /**
      Notifies '_timelineDelegate' that the current page index was updated.
      */
-    private func notifytimelineDelegateOfNewIndex() {
+    fileprivate func notifytimelineDelegateOfNewIndex() {
         if let firstViewController = pageViewController.viewControllers?.first,
-            let index = segments.indexOf({ $0.viewController == firstViewController }) {
+            let index = segments.index(where: { $0.viewController == firstViewController }) {
             delegate?.segmentedPageView(self, didUpdateSegmentIndex: index)
             segmentedControl.selectedSegmentIndex = index
         }
@@ -288,31 +288,31 @@ extension KZSegmentedPageView {
     /**
      Scrolls to the next view controller.
      */
-    public func scrollViewController(direction:UIPageViewControllerNavigationDirection) {
+    public func scrollViewController(_ direction:UIPageViewControllerNavigationDirection) {
         if let visibleViewController = pageViewController.viewControllers?.first,
-            let nextViewController = pageViewController(pageViewController, viewControllerAfterViewController: visibleViewController) {
+            let nextViewController = pageViewController(pageViewController, viewControllerAfter: visibleViewController) {
             scrollToViewController(nextViewController, direction: direction)
         }
     }
 }
 
 extension KZSegmentedPageView: UIPageViewControllerDelegate {
-    public func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         if let firstViewController = pendingViewControllers.first,
-            let index = segments.indexOf({ $0.viewController == firstViewController }) {
+            let index = segments.index(where: { $0.viewController == firstViewController }) {
             delegate?.segmentedPageView(self, willUpdatePageIndex: index)
             segmentedControl.selectedSegmentIndex = index
         }
     }
     
-    public func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         notifytimelineDelegateOfNewIndex()
     }
 }
 
 extension KZSegmentedPageView: UIPageViewControllerDataSource {
-    public func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = segments.indexOf({ $0.viewController == viewController }) else {
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = segments.index(where: { $0.viewController == viewController }) else {
             return nil
         }
         
@@ -334,8 +334,8 @@ extension KZSegmentedPageView: UIPageViewControllerDataSource {
         return segments[previousIndex].viewController
     }
     
-    public func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = segments.indexOf({ $0.viewController == viewController }) else {
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = segments.index(where: { $0.viewController == viewController }) else {
             return nil
         }
         
