@@ -301,7 +301,6 @@ extension KZSegmentedPageView: UIPageViewControllerDelegate {
         if let firstViewController = pendingViewControllers.first,
             let index = segments.indexOf({ $0.viewController == firstViewController }) {
             delegate?.segmentedPageView(self, willUpdatePageIndex: index)
-            segmentedControl.selectedSegmentIndex = index
         }
     }
     
