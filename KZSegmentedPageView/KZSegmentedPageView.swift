@@ -300,6 +300,7 @@ extension KZSegmentedPageView: UIPageViewControllerDelegate {
     public func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
         if let firstViewController = pendingViewControllers.first,
             let index = segments.indexOf({ $0.viewController == firstViewController }) {
+            segmentedControl.selectedSegmentIndex = index
             delegate?.segmentedPageView(self, willUpdatePageIndex: index)
         }
     }
@@ -329,7 +330,6 @@ extension KZSegmentedPageView: UIPageViewControllerDataSource {
             return nil
         }
         
-        segmentedControl.selectedSegmentIndex = previousIndex
         return segments[previousIndex].viewController
     }
     
@@ -349,7 +349,6 @@ extension KZSegmentedPageView: UIPageViewControllerDataSource {
             return nil
         }
         
-        segmentedControl.selectedSegmentIndex = nextIndex
         return segments[nextIndex].viewController
     }
 }
