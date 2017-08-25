@@ -57,7 +57,7 @@ open class KZSegmentedPageView: UIView {
     var segmentedRightPaddingConstraint: NSLayoutConstraint!
     var segmentedBottomPaddingToPageViewControllerConstraint: NSLayoutConstraint!
     
-    open func configure(_ owner: UIViewController, segments: [KZSegment]) {
+    open func configure(_ owner: UIViewController, segments: [KZSegmentedPageView.Segment]) {
         owner.addChildViewController(pageViewController)
         self.segments = segments
     }
@@ -127,7 +127,7 @@ open class KZSegmentedPageView: UIView {
         return transitionInProgress
     }
     
-    open var segments: [KZSegment] = [] {
+    open var segments: [KZSegmentedPageView.Segment] = [] {
         didSet {
             pageViewController.dataSource = self
             pageViewController.delegate = self
@@ -388,5 +388,16 @@ extension KZSegmentedPageView: UIPageViewControllerDataSource {
     }
 }
 
-
-
+// MARK: - Models
+extension KZSegmentedPageView {
+    public struct Segment {
+        public let title:String
+        public let viewController:UIViewController
+        
+        public init(title:String, viewController:UIViewController) {
+            self.title = title
+            self.viewController = viewController
+        }
+    }
+    
+}
