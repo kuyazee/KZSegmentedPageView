@@ -64,56 +64,56 @@ open class KZSegmentedPageView: UIView {
     
     @IBInspectable open var scHeight: CGFloat = 29 {
         didSet {
-            segmentedHeighConstraint.constant = scHeight
-            view.layoutIfNeeded()
+            self.segmentedHeighConstraint.constant = self.scHeight
+            self.view.layoutIfNeeded()
         }
     }
     
     @IBInspectable open var scPaddingLeft: CGFloat = 8 {
         didSet {
-            segmentedLeftPaddingConstraint.constant = scPaddingLeft
-            view.layoutIfNeeded()
+            self.segmentedLeftPaddingConstraint.constant = self.scPaddingLeft
+            self.view.layoutIfNeeded()
         }
     }
     
     @IBInspectable open var scPaddingRight: CGFloat = 8 {
         didSet {
-            segmentedRightPaddingConstraint.constant = scPaddingRight
-            view.layoutIfNeeded()
+            self.segmentedRightPaddingConstraint.constant = self.scPaddingRight
+            self.view.layoutIfNeeded()
         }
     }
     
     @IBInspectable open var scPaddingTop: CGFloat = 8 {
         didSet {
-            segmentedTopPaddingConstraint.constant = scPaddingTop
-            view.layoutIfNeeded()
+            self.segmentedTopPaddingConstraint.constant = self.scPaddingTop
+            self.view.layoutIfNeeded()
         }
     }
     
     @IBInspectable open var scPaddingBottom: CGFloat = 8 {
         didSet {
-            segmentedBottomPaddingToPageViewControllerConstraint.constant = scPaddingBottom
-            view.layoutIfNeeded()
+            self.segmentedBottomPaddingToPageViewControllerConstraint.constant = self.scPaddingBottom
+            self.view.layoutIfNeeded()
         }
     }
     
     @IBInspectable open var scTintColor: UIColor = UIColor(colorLiteralRed: 0, green: 122/255, blue: 1, alpha: 1) {
         didSet {
-            segmentedControl.tintColor = scTintColor
+            self.segmentedControl.tintColor = self.scTintColor
         }
     }
     
     @IBInspectable open var scBackgroundColor: UIColor = UIColor.clear {
         didSet {
-            segmentedControl.backgroundColor = scBackgroundColor
-            segmentedControl.clipsToBounds = true
-            segmentedControl.layer.cornerRadius = 4
+            self.segmentedControl.backgroundColor = self.scBackgroundColor
+            self.segmentedControl.clipsToBounds = true
+            self.segmentedControl.layer.cornerRadius = 4
         }
     }
     
     @IBInspectable open var viewBackgroundColor: UIColor = UIColor.white {
         didSet {
-            view.backgroundColor = viewBackgroundColor
+            self.view.backgroundColor = self.viewBackgroundColor
         }
     }
     
@@ -129,20 +129,22 @@ open class KZSegmentedPageView: UIView {
     
     open var segments: [KZSegmentedPageView.Segment] = [] {
         didSet {
-            pageViewController.dataSource = self
-            pageViewController.delegate = self
+            self.pageViewController.dataSource = self
+            self.pageViewController.delegate = self
             
             if let initialViewController = segments.first?.viewController {
-                scrollToViewController(initialViewController, direction: .forward)
+                self.scrollToViewController(initialViewController, direction: .forward)
             }
-            delegate?.segmentedPageView(self, didUpdatePageCount: segments.count)
+            self.delegate?.segmentedPageView(self, didUpdatePageCount: segments.count)
             
-            segmentedControl.removeAllSegments()
-            for i in 0..<segments.count {
-                segmentedControl.insertSegment(withTitle: segments[i].title, at: i, animated: false)
+            self.segmentedControl.removeAllSegments()
+            
+            self.segments.enumerated().forEach { (index, element) in
+                self.segmentedControl.insertSegment(withTitle: element.title, at: index, animated: false)
             }
             
-            segmentedControl.selectedSegmentIndex = 0
+            self.segmentedControl.selectedSegmentIndex = 0
+            self.delegate?.segmentedPageView(self, didSelectSegmentAtIndex: 0)
         }
     }
     
@@ -278,6 +280,7 @@ open class KZSegmentedPageView: UIView {
     }
 }
 
+// MARK: - Description
 extension KZSegmentedPageView {
     /**
      Scrolls to the view controller at the given index. Automatically calculates
@@ -330,6 +333,7 @@ extension KZSegmentedPageView {
     }
 }
 
+// MARK: - UIPageViewControllerDelegate
 extension KZSegmentedPageView: UIPageViewControllerDelegate {
     public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         if let firstViewController = pendingViewControllers.first,
@@ -343,6 +347,7 @@ extension KZSegmentedPageView: UIPageViewControllerDelegate {
     }
 }
 
+// MARK: - UIPageViewControllerDataSource
 extension KZSegmentedPageView: UIPageViewControllerDataSource {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let viewControllerIndex = segments.index(where: { $0.viewController == viewController }) else {
