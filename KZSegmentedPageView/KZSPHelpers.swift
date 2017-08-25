@@ -32,7 +32,7 @@ public protocol KZSegmentedPageViewDelegate: class {
      - parameter segmentedPageViewController: the segmentedPageViewController instance
      - parameter index: the index of the next page to be visible.
      */
-    func segmentedPageView(_ segmentedPageView:KZSegmentedPageView, willUpdatePageIndex index:Int)
+    func segmentedPageView(_ segmentedPageView: KZSegmentedPageView, willUpdatePageIndex index: Int)
     
     /**
      Called when a segment is clicked.
@@ -40,7 +40,7 @@ public protocol KZSegmentedPageViewDelegate: class {
      - parameter segmentedPageViewController: the segmentedPageViewController instance
      - parameter index: the index of the segmentedControl that is clicked.
      */
-    func segmentedPageView(_ segmentedPageView:KZSegmentedPageView, didSelectSegmentAtIndex index:Int)
+    func segmentedPageView(_ segmentedPageView: KZSegmentedPageView, didSelectSegmentAtIndex index: Int)
 }
 
 public struct KZSegment {

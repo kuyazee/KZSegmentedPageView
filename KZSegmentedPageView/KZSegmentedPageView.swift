@@ -9,9 +9,9 @@
 import UIKit
 
 open class KZSegmentedPageView: UIView {
-    open weak var delegate:KZSegmentedPageViewDelegate?
+    open weak var delegate: KZSegmentedPageViewDelegate?
     
-    fileprivate var view:UIView!
+    fileprivate var view: UIView!
     fileprivate var pageViewControllerView: UIView!
     open var segmentedControl: UISegmentedControl!
     open var pageViewController:UIPageViewController!
@@ -22,53 +22,53 @@ open class KZSegmentedPageView: UIView {
     var segmentedRightPaddingConstraint: NSLayoutConstraint!
     var segmentedBottomPaddingToPageViewControllerConstraint: NSLayoutConstraint!
     
-    open func configure(_ owner:UIViewController, segments:[KZSegment]) {
+    open func configure(_ owner: UIViewController, segments: [KZSegment]) {
         owner.addChildViewController(pageViewController)
         self.segments = segments
     }
     
-    @IBInspectable open var scHeight:CGFloat = 29 {
+    @IBInspectable open var scHeight: CGFloat = 29 {
         didSet {
             segmentedHeighConstraint.constant = scHeight
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable open var scPaddingLeft:CGFloat = 8 {
+    @IBInspectable open var scPaddingLeft: CGFloat = 8 {
         didSet {
             segmentedLeftPaddingConstraint.constant = scPaddingLeft
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable open var scPaddingRight:CGFloat = 8 {
+    @IBInspectable open var scPaddingRight: CGFloat = 8 {
         didSet {
             segmentedRightPaddingConstraint.constant = scPaddingRight
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable open var scPaddingTop:CGFloat = 8 {
+    @IBInspectable open var scPaddingTop: CGFloat = 8 {
         didSet {
             segmentedTopPaddingConstraint.constant = scPaddingTop
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable open var scPaddingBottom:CGFloat = 8 {
+    @IBInspectable open var scPaddingBottom: CGFloat = 8 {
         didSet {
             segmentedBottomPaddingToPageViewControllerConstraint.constant = scPaddingBottom
             view.layoutIfNeeded()
         }
     }
     
-    @IBInspectable open var scTintColor:UIColor = UIColor(colorLiteralRed: 0, green: 122/255, blue: 1, alpha: 1) {
+    @IBInspectable open var scTintColor: UIColor = UIColor(colorLiteralRed: 0, green: 122/255, blue: 1, alpha: 1) {
         didSet {
             segmentedControl.tintColor = scTintColor
         }
     }
     
-    @IBInspectable open var scBackgroundColor:UIColor = UIColor.clear {
+    @IBInspectable open var scBackgroundColor: UIColor = UIColor.clear {
         didSet {
             segmentedControl.backgroundColor = scBackgroundColor
             segmentedControl.clipsToBounds = true
@@ -76,12 +76,11 @@ open class KZSegmentedPageView: UIView {
         }
     }
     
-    @IBInspectable open var viewBackgroundColor:UIColor = UIColor.white {
+    @IBInspectable open var viewBackgroundColor: UIColor = UIColor.white {
         didSet {
             view.backgroundColor = viewBackgroundColor
         }
     }
-    
     
     @IBAction func segmentedControlClicked(_ sender: UISegmentedControl) {
         delegate?.segmentedPageView(self, didSelectSegmentAtIndex: sender.selectedSegmentIndex)
@@ -93,7 +92,7 @@ open class KZSegmentedPageView: UIView {
         return transitionInProgress
     }
     
-    open var segments:[KZSegment] = [] {
+    open var segments: [KZSegment] = [] {
         didSet {
             pageViewController.dataSource = self
             pageViewController.delegate = self
